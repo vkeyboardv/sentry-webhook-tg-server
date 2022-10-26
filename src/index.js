@@ -35,10 +35,12 @@ Environment: ${payload.environment}
 <a href="${payload.url}">View on Sentry</a>
 `;
 
-    tg.sendMessage(chatId, html, {
-      parse_mode: 'HTML',
-      disable_notification: true,
-    });
+    if (payload.environment !== 'development') {
+      tg.sendMessage(chatId, html, {
+        parse_mode: 'HTML',
+        disable_notification: true,
+      });
+    }
   }
 
   res.status(201).send({ status: true });
